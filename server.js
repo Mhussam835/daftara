@@ -67,20 +67,16 @@ app.post("/api/create-order", async (req, res) => {
     noteLines.push(`P ${totals.protein ?? 0}g / C ${totals.carbs ?? 0}g / F ${totals.fat ?? 0}g`);
   }
   noteLines.push("Placed from the iPad meal builder");
-const invoiceBody = {
-  Invoice: {
-    client_id: Number(DAFTRA_CLIENT_ID),
-    date: new Date().toISOString().slice(0, 10),
-    draft: false,
-    currency_code: "SAR",
-
-    // ربط البيع بجلسة الكاشير
-    pos_shift_id: 503,
-
-    notes: noteLines.join(" | "),
-  },
-  InvoiceItem,
-};
+ const invoiceBody = {
+    Invoice: {
+      client_id: Number(DAFTRA_CLIENT_ID),
+      date: new Date().toISOString().slice(0, 10),
+      draft: false,            // false = a real, final sale (not a draft)
+      currency_code: "SAR",
+      notes: noteLines.join(" | "),
+    },
+    InvoiceItem,
+  };
 
   const daftraBase = `https://${DAFTRA_SUBDOMAIN}.daftra.com/api2`;
 
