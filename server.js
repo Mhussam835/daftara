@@ -83,7 +83,7 @@ app.post("/api/create-order", async (req, res) => {
   const daftraBase = `https://${DAFTRA_SUBDOMAIN}.daftra.com/api2`;
 
   try {
-    const createRes = await fetch(`${daftraBase}/invoices.json`, {
+  const createRes = await fetch(`${daftraBase}/invoices?send=draft`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
