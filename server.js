@@ -71,10 +71,8 @@ app.post("/api/create-order", async (req, res) => {
     Invoice: {
       client_id: Number(DAFTRA_CLIENT_ID),
       date: new Date().toISOString().slice(0, 10),
-      draft: true,            // false = a real, final sale (not a draft)
+      draft: false,            // false = a real, final sale (not a draft)
       currency_code: "SAR",
-        pos_shift_id: "503",
-      unique_id: String(Date.now()),
       notes: noteLines.join(" | "),
     },
     InvoiceItem,
@@ -83,7 +81,7 @@ app.post("/api/create-order", async (req, res) => {
   const daftraBase = `https://${DAFTRA_SUBDOMAIN}.daftra.com/api2`;
 
   try {
-  const createRes = await fetch(`${daftraBase}/invoices?send=draft`, {
+  const createRes = await fetch(`${daftraBase}/invoices.json`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
