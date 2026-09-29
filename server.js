@@ -71,7 +71,7 @@ app.post("/api/create-order", async (req, res) => {
     Invoice: {
       client_id: Number(DAFTRA_CLIENT_ID),
       date: new Date().toISOString().slice(0, 10),
-      draft: false,            // false = a real, final sale (not a draft)
+      draft: true,            // false = a real, final sale (not a draft)
       currency_code: "SAR",
         pos_shift_id: "503",
       unique_id: String(Date.now()),
