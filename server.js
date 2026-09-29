@@ -123,6 +123,34 @@ app.post("/api/create-order", async (req, res) => {
     res.status(500).json({ success: false, error: "Could not reach Daftra." });
   }
 });
+app.get("/api/check-pos-shift", async (req, res) => {
+  const daftraBase = `https://${DAFTRA_SUBDOMAIN}.daftra.com/api2`;
+
+  try {
+    const r = await fetch(`${daftraBase}/pos_shifts.json`, {
+      method: "GET",
+      headers: {
+        "Accept": "application/json",
+        "apikey": DAFTRA_API_KEY,
+        "Posshift": "503",
+      },
+    });
+
+    const data = await r.json();
+
+    console.log("Daftra POS Shift:", JSON.stringify(data, null, 2));
+
+    res.status(r.status).json(data);
+  } catch (err) {
+    console.error("POS Shift error:", err);
+
+    res.status(500).json({
+      success: false,
+      error: err.message,
+    });
+  }
+});
+
 
 app.listen(PORT, () => {
   console.log(`Daftra order proxy listening on port ${PORT}`);
