@@ -74,7 +74,7 @@ app.post("/api/create-order", async (req, res) => {
       draft: false,            // false = a real, final sale (not a draft)
       currency_code: "SAR",
         // جلسة الكاشير
-    pos_shift_id: "503",
+    pos_shift_id: "506",
 
     // رقم فريد لكل طلب
     unique_id: String(Date.now()),
