@@ -73,6 +73,12 @@ app.post("/api/create-order", async (req, res) => {
       date: new Date().toISOString().slice(0, 10),
       draft: false,            // false = a real, final sale (not a draft)
       currency_code: "SAR",
+        // جلسة الكاشير
+    pos_shift_id: "503",
+
+    // رقم فريد لكل طلب
+    unique_id: String(Date.now()),
+
       notes: noteLines.join(" | "),
     },
     InvoiceItem,
