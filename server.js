@@ -138,7 +138,7 @@ app.get("/api/check-pos-shift", async (req, res) => {
       headers: {
         "Accept": "application/json",
         "apikey": DAFTRA_API_KEY,
-        "Posshift": "503",
+      
       },
     });
 
